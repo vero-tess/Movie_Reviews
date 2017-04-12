@@ -36,7 +36,7 @@ public class PearsonCorrelation implements Similarity {
 				numerator = numerator + value;
 			}
 		}
-		
+
 		return numerator;
 	}
 
@@ -58,7 +58,7 @@ public class PearsonCorrelation implements Similarity {
 		value1 = Math.sqrt(value1);
 		value2 = Math.sqrt(value2);
 		denominator = value1 * value2;
-		
+
 		return denominator;
 
 	}
