@@ -14,10 +14,15 @@ public class PearsonCorrelation implements Similarity {
 
 	@Override
 	public double returnSimilarity(User user1, User user2) {
-
+		double similarity;
 		double numerator = numerator(user1, user2);
 		double denominator = denominator(user1, user2);
-		double similarity = numerator / denominator;
+		if (denominator == 0) { 
+			similarity = 0;
+		} else{
+		 similarity = numerator / denominator;
+		}
+	
 		similarity = Double.parseDouble(df.format(similarity));
 		return similarity;
 	}

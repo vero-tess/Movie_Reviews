@@ -21,25 +21,50 @@ public class Main {
 		HashMap<Item, HashSet<User>> moviesMap = fp.getMoviesList();
 		HashSet<User> usersList = fp.getUsersList();
 		System.out.println("Users List: ");
-		for (User user : usersList) {
-			System.out.println("User ID: " + user.getUserID());
-		}
 		
-		System.out.println("Movies List: ");
+		
 		
 		Library library = new Library();
 		library.setMovieList(moviesMap);
 		library.setUserList(usersList);
 
+		for (User user : library.getUserList()) {
+			System.out.println("User ID: " + user.getUserID());
+		}
 		
+		System.out.println("Movies List: ");
 		
-//		Predictions prediction = new Predictions(library);
+		for(Item i: library.getMovieList().keySet()) { 
+			System.out.println(i.getMovieID());
+		}
+		Predictions prediction = new Predictions(library);
+		User user = null; 
+		for(User u: library.getUserList()) { 
+			if (u.getUserID() == 2) { 
+				user = u;
+				break;
+			}
+		}
+	//	System.out.println("User:" + user);
+		//System.out.println("");
+		Item movie = null;
 		
-		User user = new User(3);
-		Item movie = new Item(4);
+		for(Item i: library.getMovieList().keySet()) { 
+			if (i.getMovieID() == 4) { 
+				movie = i;
+				break;
+			}
+		}
+	//	System.out.println("Movie: " + movie);
+ 		
+	//	double predictionReturn = prediction.predictPreference(user, movie);
 		
-//		double predictionReturn = prediction.predictPreference(user, movie);
-//		System.out.println("Prediction: " + predictionReturn);
+		HashMap<Item, Double> ratings = prediction.produceRatings(user, 2);
+		
+		for(Item i: ratings.keySet()) { 
+			System.out.println(i.getMovieID() + " : " + ratings.get(i));
+		}
+		//System.out.println("Prediction: " + predictionReturn);
 		
 		///////////////////////////////////////////////////////
 		

@@ -18,6 +18,12 @@ public class Neighborhoods implements Neighborhood {
 		
 		 Iterator it = sortByValue.entrySet().iterator();
 		int i = 0; 
+		//if not enough similar users for neighborhood
+		if (sortByValue.size() < n) { 
+			neighborhood.putAll(sortByValue);
+			return neighborhood;
+		}
+	
 		while (i < n) { 
 			Map.Entry pair = (Map.Entry)it.next();
 			User user = (User) pair.getKey();
