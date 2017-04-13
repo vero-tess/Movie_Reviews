@@ -19,6 +19,7 @@ public class Predictions implements Prediction {
 
 	}
 
+	
 	@Override
 	public double predictPreference(User user, Item item) {
 
@@ -38,6 +39,7 @@ public class Predictions implements Prediction {
 
 	}
 
+	
 	public double numerator(User user, Item item, HashMap<User, Double> similarities) {
 		double numerator = 0;
 
@@ -50,6 +52,7 @@ public class Predictions implements Prediction {
 		return numerator;
 
 	}
+	
 
 	public double denominator(HashMap<User, Double> similarities) {
 
@@ -62,6 +65,7 @@ public class Predictions implements Prediction {
 		return denominator;
 
 	}
+	
 
 	@Override
 	public HashMap<Item, Double> produceRatings(User user, int threshold) {
@@ -92,6 +96,7 @@ public class Predictions implements Prediction {
 		return nHighestPredictions;
 	}
 
+	
 	public static Map sortByValue(Map unsortedMap) {
 		Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));
 		sortedMap.putAll(unsortedMap);

@@ -8,8 +8,9 @@ public class Library {
 	private HashSet<User> userList;
 
 	
-	public Library(HashMap<Item, HashSet<User>> movieList) {
-		this.movieList = movieList;
+	public Library() {
+		movieList = new HashMap<Item, HashSet<User>>();
+		userList = new HashSet<User>();
 	}
 
 	
@@ -22,6 +23,18 @@ public class Library {
 
 	public void setMovieList(HashMap<Item, HashSet<User>> movieList) {
 		this.movieList = movieList;
+	}
+
+
+
+	public HashSet<User> getUserList() {
+		return userList;
+	}
+
+
+
+	public void setUserList(HashSet<User> userList) {
+		this.userList = userList;
 	}
 	
 	
