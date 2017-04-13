@@ -18,7 +18,8 @@ public class Main {
 //		}
 		
 		FileParser fp = new FileParser(lines);
-		fp.createUserHashMap();
+//		fp.createUserHashMap();
+		fp.createMoviesMap();
 		
 		
 		
