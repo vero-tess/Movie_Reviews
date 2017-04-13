@@ -39,7 +39,7 @@ public class FileParser {
 		double userRating;
 		User user;
 
-		boolean found = false;
+	//	boolean found = false;
 		for (String line : lines) {
 			String delims = "::";
 			String[] tokens = line.split(delims);
@@ -49,15 +49,16 @@ public class FileParser {
 			// user = new User(userID);
 
 			if (!userList.isEmpty()) {
-
+				boolean found = false;
 				for (User u : userList) {
 					if (u.getUserID() == userID) {
+					//	System.out.println(userID);
 						found = true;
 						break;
 					}
 				}
-
 				if (found == false) {
+				//	System.out.println("not found:" + userID);
 					user = new User(userID);
 					userList.add(user);
 				}
@@ -66,49 +67,8 @@ public class FileParser {
 				userList.add(user);
 			}
 		}
-		//
-		// movieIdString = tokens[1];
-		// movieID = Integer.parseInt(movieIdString);
-		//
-		// userRatingString = tokens[2];
-		// userRating = Double.parseDouble(userRatingString);
-		// Item movie = new Item(movieID);
 
-		// // if users' ArrayList is empty, first user is added
-		// if (users.isEmpty()) {
-		// users.add(user);
-		//
-		// // populate movie HM of user with current movie
-		// user.addRating(movie, userRating);
-		// }
-		// // users' ArrayList is NOT empty
-		// else {
-		//
-		// // find user in users' ArrayList
-		// for (User tempUser : users) {
-		// // user has already been created
-		// if (user.getUserID() == tempUser.getUserID()) {
-		// // add movie to user's HM
-		// user.addRating(movie, userRating);
-		// }
-		// // user has NOT been created
-		// else {
-		// // create new user
-		// User newUser = new User(userID);
-		//
-		// // add movie to user's HM
-		// newUser.addRating(movie, userRating);
-		//
-		// // add user to users' ArrayList
-		// users.add(newUser);
-		// user = newUser;
-		// break;
-		// }
-		// }
-		// }
-		//
-		//
-		// }
+
 	}
 
 	/**
@@ -127,8 +87,6 @@ public class FileParser {
 		User user;
 		Item movie; // key in HM
 
-		boolean foundUser = false;
-		boolean foundMovie = false;
 		for (String line : lines) {
 			String delims = "::";
 			String[] tokens = line.split(delims);
@@ -146,6 +104,8 @@ public class FileParser {
 			// movie = new Item(movieID);
 
 			// the movie list is not empty
+			boolean foundUser = false; 
+			boolean foundMovie = false;
 			if (!movieList.isEmpty()) {
 
 				for (Item i : movieList.keySet()) {
@@ -251,62 +211,27 @@ public class FileParser {
 				}
 			}
 		}
+	
+		for(Item i: movieList.keySet()) { 
+			System.out.println("movie: " + i.getMovieID()); 
+			System.out.print("Users: ");
+			for(User u: movieList.get(i)) { 
+				System.out.print(u.getUserID()+ " ");
+			}
+			System.out.println();
+			
+		}
+		
+		
+		for(User u: userList) { 
+			System.out.println("User: "+u.getUserID());
+			for(Item i: u.getMovieRatings().keySet()) { 
+				System.out.print("Movie "+i.getMovieID()+ ", Rating: " + u.getMovieRatings().get(i) + " ");
+			}
+			System.out.println();
+		}
 	}
+
+	
 }
 
-//
-//
-// if (userList)
-// // if movies' ArrayList is empty, first movie is added
-// if (movies.isEmpty()) {
-// movies.add(movie);
-//
-// HashSet<User> tempUserSet = new HashSet<User>();
-// tempUserSet.add(user);
-//
-// // populate movie HM of movie with current user
-// userList.put(movie, tempUserSet);
-// }
-// // movies' ArrayList is NOT empty
-// else {
-//
-// // find movie in movies' ArrayList
-// for (Item tempMovie : movies) {
-// // movie has already been created
-// if (movie.getMovieID() == tempMovie.getMovieID()) {
-// // add user to movie's Hashset
-// HashSet<User> tempUserSet = userList.get(movie);
-// tempUserSet.add(user);
-//
-// userList.put(tempMovie, tempUserSet);
-// }
-//
-// // movie has NOT been created yet
-// else {
-// // create new movie
-// Item newMovie = new Item(movieID);
-//
-// // create new HashSet for movie
-// HashSet<User> newSet = new HashSet<User>();
-//
-// // add user to movies's HS
-// newSet.add(user);
-//
-// // add HS to movie's value in HM
-// userList.put(newMovie, newSet);
-//
-// // add user to users' ArrayList
-// movies.add(newMovie);
-// movie = newMovie;
-// break;
-// }
-// }
-// }
-// }
-// // Prints out HM for each movie
-// for (Item tempMovie : userList.keySet()) {
-// int key = tempMovie.getMovieID();
-// HashSet<User> setOfUsers = userList.get(tempMovie);
-// System.out.println(key + " " + setOfUsers);
-// }
-// }

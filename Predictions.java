@@ -1,5 +1,8 @@
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Predictions implements Prediction {
 
@@ -19,7 +22,7 @@ public class Predictions implements Prediction {
 	@Override
 	public double predictPreference(User user, Item item) {
 
-		HashSet<User> userList = library.getUserList().get(item);
+		HashSet<User> userList = library.getMovieList().get(item);
 		HashMap<User, Double> similarities = new HashMap();
 		for (User u : userList) {
 			similarities.put(u, correlation.returnSimilarity(user, u));
@@ -61,9 +64,38 @@ public class Predictions implements Prediction {
 	}
 
 	@Override
-	public double produceRatings(User user, int threshold) {
-		// TODO Auto-generated method stub
-		return 0;
+	public HashMap<Item, Double> produceRatings(User user, int threshold) {
+		HashMap<Item, HashSet<User>> movieList = library.getMovieList();
+		HashMap<Item, Double> predictions = new HashMap();
+		HashMap<Item, Double> nHighestPredictions = new HashMap();
+		for (Item i : movieList.keySet()) {
+
+			if (movieList.get(i).contains(user)) {
+				// don't do anything
+			} else {
+				double prediction = predictPreference(user, i);
+				predictions.put(i, prediction);
+			}
+		}
+
+		Map<Item, Double> sortByValue = sortByValue(predictions);
+
+		Iterator it = sortByValue.entrySet().iterator();
+		int i = 0;
+		while (i < n) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Item item = (Item) pair.getKey();
+			Double value = (Double) pair.getValue();
+			nHighestPredictions.put(item, value);
+			i++;
+		}
+		return nHighestPredictions;
+	}
+
+	public static Map sortByValue(Map unsortedMap) {
+		Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));
+		sortedMap.putAll(unsortedMap);
+		return sortedMap;
 	}
 
 }
