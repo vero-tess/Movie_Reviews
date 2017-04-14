@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 /**
  * This class reads in a file that is specified.
- * @author veronikaalex
  *
  */
 public class FileReader {
 	
+	/* Instance Variables */
 	private String filename;
 	private ArrayList<String> lines;
 	
@@ -37,7 +37,6 @@ public class FileReader {
 	private void readFile() {
 		
 		try {
-//			System.out.println("Getting here 0!");
 			File inputFile = new File(filename);
 			Scanner in = new Scanner(inputFile);
 			

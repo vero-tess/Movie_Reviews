@@ -6,25 +6,37 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Computes the item predictions.
+ *
+ */
 public class Predictions implements Prediction {
 
+	
+	/* Instance Variables */
 	private Library library;
 	private PearsonCorrelation correlation;
 	private Neighborhoods neighborhood;
 	private final int n = 2;
-
 	private DecimalFormat df;
 
+	
+	/* Constructor */
 	public Predictions(Library library) {
 
 		this.library = library;
 		correlation = new PearsonCorrelation();
 		neighborhood = new Neighborhoods(n);
-
 		df = new DecimalFormat("##.###");
 		df.setRoundingMode(RoundingMode.DOWN);
 	}
 
+	
+	/**
+	 * Predicts the preference of an item for a user
+	 * @param user the user for which the prediction is being made
+	 * @param item the item of which to predict the preference
+	 */
 	@Override
 	public double predictPreference(User user, Item item) {
 		double prediction = 0;
@@ -48,6 +60,14 @@ public class Predictions implements Prediction {
 
 	}
 
+	
+	/**
+	 * The numerator for the prediction equation.
+	 * @param user the user for which the prediction is being made
+	 * @param item the item of which to predict the preference
+	 * @param similarities the map of similarities between other users for a user
+	 * @return the value of the numerator
+	 */
 	private double numerator(User user, Item item, HashMap<User, Double> similarities) {
 		double numerator = 0;
 
@@ -58,9 +78,14 @@ public class Predictions implements Prediction {
 		}
 
 		return numerator;
-
 	}
 
+	
+	/**
+	 * The denominator for the prediction equation.
+	 * @param similarities the map of similarities between other users for a user
+	 * @return the value of the denominator
+	 */
 	private double denominator(HashMap<User, Double> similarities) {
 
 		double denominator = 0;
@@ -70,9 +95,14 @@ public class Predictions implements Prediction {
 		}
 
 		return denominator;
-
 	}
 
+	
+	/**
+	 * Computes the predicted movies for a user given a threshold
+	 * @param user the user for which to predict the movies
+	 * @param threshold the ceiling for the number of movies to predict
+	 */
 	@Override
 	public HashMap<Item, Double> produceRatings(User user, int threshold) {
 	
@@ -111,6 +141,12 @@ public class Predictions implements Prediction {
 		return nHighestPredictions;
 	}
 
+	
+	/**
+	 * Sort an unsorted map
+	 * @param unsortedMap the unsorted map
+	 * @return the sorted map
+	 */
 	public static Map sortByValue(Map unsortedMap) {
 		Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));
 		sortedMap.putAll(unsortedMap);
