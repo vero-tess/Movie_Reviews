@@ -17,7 +17,7 @@ public class Predictions implements Prediction {
 	private Library library;
 	private PearsonCorrelation correlation;
 	private Neighborhoods neighborhood;
-	private final int n = 2;
+	private final int n = 20;
 	private DecimalFormat df;
 
 	
@@ -45,7 +45,7 @@ public class Predictions implements Prediction {
 		for (User u : userList) {
 			similarities.put(u, correlation.returnSimilarity(user, u));
 		}
-		neighborhood.generateNeighborhood(similarities);
+		similarities = (HashMap<User, Double>) neighborhood.generateNeighborhood(similarities);
 
 		double numerator = numerator(user, item, similarities);
 		double denominator = denominator(similarities);
