@@ -40,7 +40,7 @@ public class Predictions implements Prediction {
 	@Override
 	public double predictPreference(User user, Item item) {
 		double prediction = 0;
-		HashSet<User> userList = library.getMovieList().get(item);
+		HashSet<User> userList = library.getItemList().get(item);
 		HashMap<User, Double> similarities = new HashMap();
 		for (User u : userList) {
 			similarities.put(u, correlation.returnSimilarity(user, u));
@@ -72,7 +72,7 @@ public class Predictions implements Prediction {
 		double numerator = 0;
 
 		for (User u : similarities.keySet()) {
-			double rating = u.getMovieRatings().get(item);
+			double rating = u.getRatings().get(item);
 			double value = similarities.get(u) * (rating - u.getAverageRatings());
 			numerator = numerator + value;
 		}
@@ -106,7 +106,7 @@ public class Predictions implements Prediction {
 	@Override
 	public HashMap<Item, Double> produceRatings(User user, int threshold) {
 	
-		HashMap<Item, HashSet<User>> movieList = library.getMovieList();
+		HashMap<Item, HashSet<User>> movieList = library.getItemList();
 		HashMap<Item, Double> predictions = new HashMap();
 
 		HashMap<Item, Double> nHighestPredictions = new HashMap();

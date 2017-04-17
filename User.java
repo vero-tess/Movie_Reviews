@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class User {
 
 	/* Instance Variables */
-	HashMap<Item, Double> movieRatings;
+	HashMap<Item, Double> ratings;
 	double averageRatings;
 	double totalRatings;
 	int userID;
@@ -15,7 +15,7 @@ public class User {
 	
 	/* Constructor */
 	public User(int userID) {
-		movieRatings = new HashMap<Item, Double>();
+		ratings = new HashMap<Item, Double>();
 		averageRatings = 0;
 		totalRatings = 0;
 		this.userID = userID;
@@ -26,8 +26,8 @@ public class User {
 	 * Getter for movie ratings
 	 * @return hashmap of movie ratings
 	 */
-	public HashMap<Item, Double> getMovieRatings() {
-		return movieRatings;
+	public HashMap<Item, Double> getRatings() {
+		return ratings;
 	}
 
 	
@@ -46,9 +46,9 @@ public class User {
 	 * @param rating of item
 	 */
 	public void addRating(Item item, double rating) {
-		movieRatings.put(item, rating);
+		ratings.put(item, rating);
 		totalRatings = totalRatings + rating;
-		averageRatings = totalRatings / movieRatings.size();
+		averageRatings = totalRatings / ratings.size();
 	}
 
 
