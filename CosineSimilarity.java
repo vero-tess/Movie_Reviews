@@ -52,12 +52,14 @@ public class CosineSimilarity implements Similarity {
 
 		for (Item i : user1Ratings.keySet()) {
 
-			if (user2Ratings.containsKey(i)) {
-
-				value1 = value1 + Math.pow(user1Ratings.get(i), 2);
-				value2 = value2 + Math.pow(user2Ratings.get(i), 2);
-			}
+			value1 = value1 + Math.pow(user1Ratings.get(i), 2);
 		}
+
+		for (Item i : user2Ratings.keySet()) {
+
+			value2 = value2 + Math.pow(user2Ratings.get(i), 2);
+		}
+
 		value1 = Math.sqrt(value1);
 		value2 = Math.sqrt(value2);
 		denominator = value1 * value2;
