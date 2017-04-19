@@ -3,8 +3,8 @@ import java.util.HashSet;
 
 /**
  * Represents a library. Similar to a Netflix library. It contains a HashSet of
- * all users and a HashMap of all movies and the users that rated that specific
- * movie.
+ * all users and a HashMap of all items and the users that rated that specific
+ * item.
  *
  */
 public class Library {
@@ -20,9 +20,9 @@ public class Library {
 	}
 
 	/**
-	 * Setter for movieList
+	 * Setter for itemList
 	 * 
-	 * @param movieList
+	 * @param itemList
 	 */
 	public void setItemList(HashMap<Item, HashSet<User>> itemList) {
 		this.itemList = itemList;
@@ -47,6 +47,11 @@ public class Library {
 		this.userList = userList;
 	}
 
+	/**
+	 * Getter for the itemList
+	 * 
+	 * @return itemList
+	 */
 	public HashMap<Item, HashSet<User>> getItemList() {
 		return itemList;
 	}

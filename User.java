@@ -10,7 +10,6 @@ public class User {
 	double averageRatings;
 	double totalRatings;
 	String userID;
-	double movieRating;
 
 	/* Constructor */
 	public User(String userID) {

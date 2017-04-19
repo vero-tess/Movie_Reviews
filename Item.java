@@ -7,7 +7,6 @@ import java.util.HashMap;
 public class Item {
 
 	/* Instance Variables */
-	// String userID;
 	String itemID;
 
 	/* Constructor */
@@ -17,18 +16,18 @@ public class Item {
 	}
 
 	/**
-	 * Getter for movieID
+	 * Getter for itemID
 	 * 
-	 * @return movieID
+	 * @return itemID
 	 */
 	public String getItemID() {
 		return itemID;
 	}
 
 	/**
-	 * Setter for movieID
+	 * Setter for itemID
 	 * 
-	 * @param movieID
+	 * @param itemID
 	 */
 	public void setItemID(String itemID) {
 		this.itemID = itemID;

@@ -29,7 +29,12 @@ public class BaseLine implements Prediction {
 	}
 
 	/**
-	 * This method predicts preferences
+	 * Predicts the preference of an item for a user
+	 * 
+	 * @param user
+	 *            the user for which the prediction is being made
+	 * @param item
+	 *            the item of which to predict the preference
 	 */
 	@Override
 	public double predictPreference(User user, Item item) {
@@ -42,6 +47,14 @@ public class BaseLine implements Prediction {
 		return preference;
 	}
 
+	/**
+	 * Computes the predicted movies for a user given a threshold
+	 * 
+	 * @param user
+	 *            the user for which to predict the movies
+	 * @param threshold
+	 *            the ceiling for the number of movies to predict
+	 */
 	@Override
 	public HashMap<Item, Double> produceRatings(User user, int threshold) {
 		HashMap<Item, HashSet<User>> itemList = library.getItemList();
@@ -80,7 +93,13 @@ public class BaseLine implements Prediction {
 
 	}
 
-	public double calculateUserBaseline(User user) {
+	/**
+	 * Calculate the baseline for the user
+	 * 
+	 * @param user
+	 * @return the baseline prediction for the user
+	 */
+	private double calculateUserBaseline(User user) {
 		double baselineUser = 0;
 
 		HashSet<User> userList = library.getUserList();
@@ -106,7 +125,14 @@ public class BaseLine implements Prediction {
 		return baselineUser;
 	}
 
-	public double calculateBaselineItem(User user, Item item) {
+	/**
+	 * Calculate the baseline prediction for the item
+	 * 
+	 * @param user
+	 * @param item
+	 * @return the baseline prediction for the user
+	 */
+	private double calculateBaselineItem(User user, Item item) {
 		double baselineItem = 0;
 		HashSet<User> userList = library.getUserList();
 		HashMap<Item, HashSet<User>> itemList = library.getItemList();
@@ -150,6 +176,13 @@ public class BaseLine implements Prediction {
 		return overallRatings;
 	}
 
+	/**
+	 * Sort an unsorted map
+	 * 
+	 * @param unsortedMap
+	 *            the unsorted map
+	 * @return the sorted map
+	 */
 	public static Map sortByValue(Map unsortedMap) {
 		Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));
 		sortedMap.putAll(unsortedMap);

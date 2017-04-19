@@ -1,16 +1,29 @@
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.HashMap;
-
+/**
+ * This class represents the cosine similarity model 
+ * @author ShadyJ
+ *
+ */
 public class CosineSimilarity implements Similarity {
 
 	DecimalFormat df;
-
+/**
+ * the constructor for the class
+ */
 	public CosineSimilarity() {
 		df = new DecimalFormat("##.###");
 		df.setRoundingMode(RoundingMode.UP);
 	}
-
+	/**
+	 * Computes the similarity between two users.
+	 * 
+	 * @param user1
+	 *            the first user
+	 * @param user2
+	 *            the second user
+	 */
 	@Override
 	public double returnSimilarity(User user1, User user2) {
 		double similarity;
@@ -26,7 +39,14 @@ public class CosineSimilarity implements Similarity {
 		return similarity;
 	}
 
-	public double numerator(User user1, User user2) {
+	/**
+	 * Creates the numerator of the similarity equation.
+	 * 
+	 * @param user1
+	 * @param user2
+	 * @return value of numerator
+	 */
+	private double numerator(User user1, User user2) {
 		double numerator = 0;
 		HashMap<Item, Double> user1Ratings = user1.getRatings();
 		HashMap<Item, Double> user2Ratings = user2.getRatings();
@@ -42,8 +62,14 @@ public class CosineSimilarity implements Similarity {
 		return numerator;
 
 	}
-
-	public double denominator(User user1, User user2) {
+	/**
+	 * Creates the denominator of the similarity equation.
+	 * 
+	 * @param user1
+	 * @param user2
+	 * @return the value of the denominator
+	 */
+	private double denominator(User user1, User user2) {
 		double denominator = 0;
 		HashMap<Item, Double> user1Ratings = user1.getRatings();
 		HashMap<Item, Double> user2Ratings = user2.getRatings();

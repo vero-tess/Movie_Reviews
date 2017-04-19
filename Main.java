@@ -34,7 +34,7 @@ public class Main {
 			library.setItemList(itemMap);
 			library.setUserList(usersList);
 			
-			//ask user which similarity method to use, create an instance of that and send it to predictions
+			//check which is the best prediction model based on the data
 			CheckBestPredictor check = new CheckBestPredictor(library);
 			Prediction prediction = check.returnBestPredictor();
 			
@@ -72,7 +72,7 @@ public class Main {
 							break;
 						}
 					}
-				//	System.out.println("user:" + user.getUserID() + " movie: " + movie.getItemID());
+				
 					double predictionReturn = prediction.predictPreference(user, item);
 					System.out.println("Prediction: " + predictionReturn);
 					System.out.println(" ");

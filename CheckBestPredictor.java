@@ -23,6 +23,9 @@ public class CheckBestPredictor {
 	 */
 	public Prediction returnBestPredictor() {
 		HashSet<User> users = library.getUserList();
+		for(User u: users) {
+			System.out.println(u.getUserID());
+		}
 		double pearsonCorrelationRegression = 0;
 		double cosineSimilarityRegression = 0;
 		double baselineRegression = 0;
@@ -89,6 +92,13 @@ public class CheckBestPredictor {
 		pearsonCorrelationRegression = (double) 1 - (sumOfResidualPearson / totalSumSquares);
 		cosineSimilarityRegression = (double) 1 - (sumOfResidualCosine / totalSumSquares);
 
+		
+		
+		System.out.println("baseline: " + baselineRegression);
+		System.out.println("pearson: " + pearsonCorrelationRegression);
+		System.out.println("cosine: " + cosineSimilarityRegression);
+		
+		
 		// returns the model with highest coefficient
 		if (Math.max(baselineRegression,
 				Math.max(pearsonCorrelationRegression, cosineSimilarityRegression)) == baselineRegression) {

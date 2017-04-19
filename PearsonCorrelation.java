@@ -47,7 +47,7 @@ public class PearsonCorrelation implements Similarity {
 	 * @param user2
 	 * @return value of numerator
 	 */
-	public double numerator(User user1, User user2) {
+	private double numerator(User user1, User user2) {
 
 		double numerator = 0;
 		HashMap<Item, Double> user1Ratings = user1.getRatings();
@@ -72,7 +72,7 @@ public class PearsonCorrelation implements Similarity {
 	 * @param user2
 	 * @return the value of the denominator
 	 */
-	public double denominator(User user1, User user2) {
+	private double denominator(User user1, User user2) {
 		double denominator = 0;
 		HashMap<Item, Double> user1Ratings = user1.getRatings();
 		HashMap<Item, Double> user2Ratings = user2.getRatings();
