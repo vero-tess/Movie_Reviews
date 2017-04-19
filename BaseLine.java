@@ -2,13 +2,24 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
+/**
+ * Represents the baseline model for predicting preferences
+ */
 public class BaseLine implements Prediction {
 
 	Library library;
 	private DecimalFormat df;
 	double overallRatings;
 
+	/**
+	 * This is the constructor for the class
+	 * 
+	 * @param library
+	 */
 	public BaseLine(Library library) {
 
 		this.library = library;
@@ -17,6 +28,9 @@ public class BaseLine implements Prediction {
 		overallRatings = calculateOverallRating();
 	}
 
+	/**
+	 * This method predicts preferences
+	 */
 	@Override
 	public double predictPreference(User user, Item item) {
 
@@ -30,8 +44,40 @@ public class BaseLine implements Prediction {
 
 	@Override
 	public HashMap<Item, Double> produceRatings(User user, int threshold) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<Item, HashSet<User>> itemList = library.getItemList();
+		HashMap<Item, Double> predictions = new HashMap();
+
+		HashMap<Item, Double> nHighestPredictions = new HashMap();
+		for (Item i : itemList.keySet()) {
+
+			if (itemList.get(i).contains(user)) {
+				// if user's already rated movie, don't do anything
+			} else {
+				// get a prediction for that user for the movie
+				double prediction = predictPreference(user, i);
+				predictions.put(i, prediction);
+			}
+		}
+
+		Map<Item, Double> sortByValue = sortByValue(predictions);
+
+		Iterator it = sortByValue.entrySet().iterator();
+		int i = 0;
+		// if movie predictions is less than threshold n, return all predictions
+		if (sortByValue.size() < threshold) {
+			nHighestPredictions.putAll(sortByValue);
+			return nHighestPredictions;
+		}
+		// else get top n
+		while (i < threshold) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Item item = (Item) pair.getKey();
+			Double value = (Double) pair.getValue();
+			nHighestPredictions.put(item, value);
+			i++;
+		}
+		return nHighestPredictions;
+
 	}
 
 	public double calculateUserBaseline(User user) {
@@ -102,6 +148,12 @@ public class BaseLine implements Prediction {
 		overallRatings = totalRating / total;
 
 		return overallRatings;
+	}
+
+	public static Map sortByValue(Map unsortedMap) {
+		Map sortedMap = new TreeMap(new ValueComparator(unsortedMap));
+		sortedMap.putAll(unsortedMap);
+		return sortedMap;
 	}
 
 }

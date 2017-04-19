@@ -3,19 +3,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * Parses the lines of a file and populates
- * all of the data structures used.
+ * Parses the lines of a file and populates all of the data structures used.
  *
  */
 public class FileParser {
 
-	
 	/* Instance variables */
 	private ArrayList<String> lines;
 	private HashMap<Item, HashSet<User>> itemList;
 	private HashSet<User> userList;
 
-	
 	/* Constructor */
 	public FileParser(ArrayList<String> lines) {
 		itemList = new HashMap<Item, HashSet<User>>();
@@ -26,17 +23,14 @@ public class FileParser {
 		}
 	}
 
-	
 	/**
-	* Creates a hashset of user objects.
-	*/
+	 * Creates a hashset of user objects.
+	 */
 	public void createUserList() {
 
 		String userId;
 		String itemId;
 		String userRatingString;
-//		int userID;
-//		int itemID;
 		double userRating;
 		User user;
 
@@ -45,7 +39,6 @@ public class FileParser {
 			String[] tokens = line.split(delims);
 
 			userId = tokens[0];
-//			userID = Integer.parseInt(userIdString);
 
 			if (!userList.isEmpty()) {
 				boolean found = false;
@@ -66,12 +59,11 @@ public class FileParser {
 		}
 	}
 
-	
 	/**
-	 * Creates a hashmap of item objects and a hashset of all the users
-	 * who have rated that item (the user's rating for that item) AND
-	 * creates a hashmap for each user and populates it with items that they have
-	 * rated, including their rating
+	 * Creates a hashmap of item objects and a hashset of all the users who have
+	 * rated that item (the user's rating for that item) AND creates a hashmap
+	 * for each user and populates it with items that they have rated, including
+	 * their rating
 	 */
 	public void createItemMap() {
 
@@ -86,35 +78,25 @@ public class FileParser {
 			String lineTemp;
 			String delims = "::|\";\"|\"";
 			String[] tokens;
-			
 
-			if(line.startsWith("\"")){
-			    //start at the 1st character not the 0th
+			if (line.startsWith("\"")) {
+				// start at the 1st character not the 0th
 				line = line.substring(1);
-			    tokens = line.split(delims);
-			}
-			else {
+				tokens = line.split(delims);
+			} else {
 				tokens = line.split(delims);
 			}
-			    
+
 			userId = tokens[0];
-		//	System.out.println("User ID: " + userId);
-//			userID = Integer.parseInt(userIdString);
-			// user = new User(userID);
-
-
+	
 			itemId = tokens[1];
-//			itemID = Integer.parseInt(movieIdString);
-		//	System.out.println("Item ID: " + itemId);
 
 
 			userRatingString = tokens[2];
 			userRating = Double.parseDouble(userRatingString);
-		//	System.out.println("User Rating: " + userRating);
-
 
 			// the movie list is not empty
-			boolean foundUser = false; 
+			boolean foundUser = false;
 			boolean foundItem = false;
 			if (!itemList.isEmpty()) {
 
@@ -221,27 +203,25 @@ public class FileParser {
 				}
 			}
 		}
-	
 
 	}
-	
-	
+
 	/**
 	 * Getter for ItemList
+	 * 
 	 * @return itemList
 	 */
 	public HashMap<Item, HashSet<User>> getItemsList() {
 		return itemList;
 	}
-	
-	
+
 	/**
 	 * Getter for userList
+	 * 
 	 * @return userList
 	 */
 	public HashSet<User> getUsersList() {
 		return userList;
 	}
 
-	
 }
