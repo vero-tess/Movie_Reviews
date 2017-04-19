@@ -35,9 +35,10 @@ public class Main {
 			library.setUserList(usersList);
 			
 			//ask user which similarity method to use, create an instance of that and send it to predictions
-			Similarity correlation = new CosineSimilarity();
-			Prediction prediction = new BaseLine(library);
-
+			CheckBestPredictor check = new CheckBestPredictor(library);
+			Prediction prediction = check.returnBestPredictor();
+			
+			
 			boolean flag = false;
 			while (!flag) {
 
