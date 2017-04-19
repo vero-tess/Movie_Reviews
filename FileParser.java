@@ -33,10 +33,19 @@ public class FileParser {
 		String userRatingString;
 		double userRating;
 		User user;
+		
 
 		for (String line : lines) {
-			String delims = "::";
-			String[] tokens = line.split(delims);
+			String delims = "::|\";\"|\"";
+			String[] tokens;
+			
+			if (line.startsWith("\"")) {
+				// start at the 1st character not the 0th
+				line = line.substring(1);
+				tokens = line.split(delims);
+			} else {
+				tokens = line.split(delims);
+			}
 
 			userId = tokens[0];
 
@@ -75,7 +84,6 @@ public class FileParser {
 		Item item; // key in HM
 
 		for (String line : lines) {
-			String lineTemp;
 			String delims = "::|\";\"|\"";
 			String[] tokens;
 
@@ -88,12 +96,14 @@ public class FileParser {
 			}
 
 			userId = tokens[0];
+			System.out.println(userId);
 	
 			itemId = tokens[1];
-
+			System.out.println(itemId);
 
 			userRatingString = tokens[2];
 			userRating = Double.parseDouble(userRatingString);
+			System.out.println(userRating);
 
 			// the movie list is not empty
 			boolean foundUser = false;
