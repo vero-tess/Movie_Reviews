@@ -14,16 +14,16 @@ public class Predictions implements Prediction {
 
 	/* Instance Variables */
 	private Library library;
-	private PearsonCorrelation correlation;
+	private Similarity correlation;
 	private Neighborhoods neighborhood;
 	private final int n = 20;
 	private DecimalFormat df;
 
 	/* Constructor */
-	public Predictions(Library library) {
+	public Predictions(Library library, Similarity correlation) {
 
 		this.library = library;
-		correlation = new PearsonCorrelation();
+		this.correlation = correlation;
 		neighborhood = new Neighborhoods(n);
 		df = new DecimalFormat("##.###");
 		df.setRoundingMode(RoundingMode.DOWN);

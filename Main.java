@@ -34,9 +34,11 @@ public class Main {
 			library.setItemList(moviesMap);
 			library.setUserList(usersList);
 
-			Predictions prediction = new Predictions(library);
+			//ask user which similarity method to use, create an instance of that and send it to predictions
+			Similarity correlation = new CosineSimilarity();
+			Prediction prediction = new BaseLine(library);
 
-
+			
 			boolean flag = false;
 			while (!flag) {
 

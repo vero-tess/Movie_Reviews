@@ -72,7 +72,6 @@ public class FileParser {
 		String userID;
 		String itemID;
 		String userRatingString;
-
 		double userRating;
 		User user;
 		Item item; // key in HM
@@ -200,25 +199,6 @@ public class FileParser {
 			}
 		}
 
-		// Print movieList
-		// for(Item i: movieList.keySet()) {
-		// System.out.println("movie: " + i.getMovieID());
-		// System.out.print("Users: ");
-		// for(User u: movieList.get(i)) {
-		// System.out.print(u.getUserID()+ " ");
-		// }
-		// System.out.println();
-		// }
-
-		// Print userList
-		// for(User u: userList) {
-		// System.out.println("User: "+u.getUserID());
-		// for(Item i: u.getMovieRatings().keySet()) {
-		// System.out.print("Movie "+i.getMovieID()+ ", Rating: " +
-		// u.getMovieRatings().get(i) + " ");
-		// }
-		// System.out.println();
-		// }
 	}
 
 	/**
