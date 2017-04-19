@@ -12,7 +12,6 @@ import java.util.TreeMap;
  */
 public class Predictions implements Prediction {
 
-	
 	/* Instance Variables */
 	private Library library;
 	private PearsonCorrelation correlation;
@@ -20,7 +19,6 @@ public class Predictions implements Prediction {
 	private final int n = 20;
 	private DecimalFormat df;
 
-	
 	/* Constructor */
 	public Predictions(Library library) {
 
@@ -31,11 +29,13 @@ public class Predictions implements Prediction {
 		df.setRoundingMode(RoundingMode.DOWN);
 	}
 
-	
 	/**
 	 * Predicts the preference of an item for a user
-	 * @param user the user for which the prediction is being made
-	 * @param item the item of which to predict the preference
+	 * 
+	 * @param user
+	 *            the user for which the prediction is being made
+	 * @param item
+	 *            the item of which to predict the preference
 	 */
 	@Override
 	public double predictPreference(User user, Item item) {
@@ -60,12 +60,15 @@ public class Predictions implements Prediction {
 
 	}
 
-	
 	/**
 	 * The numerator for the prediction equation.
-	 * @param user the user for which the prediction is being made
-	 * @param item the item of which to predict the preference
-	 * @param similarities the map of similarities between other users for a user
+	 * 
+	 * @param user
+	 *            the user for which the prediction is being made
+	 * @param item
+	 *            the item of which to predict the preference
+	 * @param similarities
+	 *            the map of similarities between other users for a user
 	 * @return the value of the numerator
 	 */
 	private double numerator(User user, Item item, HashMap<User, Double> similarities) {
@@ -80,10 +83,11 @@ public class Predictions implements Prediction {
 		return numerator;
 	}
 
-	
 	/**
 	 * The denominator for the prediction equation.
-	 * @param similarities the map of similarities between other users for a user
+	 * 
+	 * @param similarities
+	 *            the map of similarities between other users for a user
 	 * @return the value of the denominator
 	 */
 	private double denominator(HashMap<User, Double> similarities) {
@@ -97,15 +101,17 @@ public class Predictions implements Prediction {
 		return denominator;
 	}
 
-	
 	/**
 	 * Computes the predicted movies for a user given a threshold
-	 * @param user the user for which to predict the movies
-	 * @param threshold the ceiling for the number of movies to predict
+	 * 
+	 * @param user
+	 *            the user for which to predict the movies
+	 * @param threshold
+	 *            the ceiling for the number of movies to predict
 	 */
 	@Override
 	public HashMap<Item, Double> produceRatings(User user, int threshold) {
-	
+
 		HashMap<Item, HashSet<User>> movieList = library.getItemList();
 		HashMap<Item, Double> predictions = new HashMap();
 
@@ -113,16 +119,16 @@ public class Predictions implements Prediction {
 		for (Item i : movieList.keySet()) {
 
 			if (movieList.get(i).contains(user)) {
-				//if user's already rated movie, don't do anything 
+				// if user's already rated movie, don't do anything
 			} else {
-				//get a prediction for that user for the movie 
+				// get a prediction for that user for the movie
 				double prediction = predictPreference(user, i);
 				predictions.put(i, prediction);
 			}
 		}
 
 		Map<Item, Double> sortByValue = sortByValue(predictions);
-		
+
 		Iterator it = sortByValue.entrySet().iterator();
 		int i = 0;
 		// if movie predictions is less than threshold n, return all predictions
@@ -141,10 +147,11 @@ public class Predictions implements Prediction {
 		return nHighestPredictions;
 	}
 
-	
 	/**
 	 * Sort an unsorted map
-	 * @param unsortedMap the unsorted map
+	 * 
+	 * @param unsortedMap
+	 *            the unsorted map
 	 * @return the sorted map
 	 */
 	public static Map sortByValue(Map unsortedMap) {

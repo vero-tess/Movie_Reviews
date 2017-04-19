@@ -4,7 +4,6 @@ import java.util.HashSet;
 
 public class FileParser2 {
 
-	
 	/* Instance variables */
 	private ArrayList<String> lines;
 	private ArrayList<User> users;
@@ -13,7 +12,6 @@ public class FileParser2 {
 	private HashMap<Item, HashSet<User>> movieList;
 	private HashSet<User> userList;
 
-	
 	/* Constructor */
 	public FileParser2(ArrayList<String> lines) {
 		users = new ArrayList<User>();
@@ -27,40 +25,35 @@ public class FileParser2 {
 		}
 	}
 
-	
 	/**
-	* Creates a hashset of user objects
-	*/
+	 * Creates a hashset of user objects
+	 */
 	public void createUserList() {
 
-		String userIdString;
-		String movieIdString;
-		String userRatingString;
-		int userID;
-		int movieID;
+		String userID;
 		double userRating;
 		User user;
 
-	//	boolean found = false;
+		// boolean found = false;
 		for (String line : lines) {
 			String delims = "::";
 			String[] tokens = line.split(delims);
 
-			userIdString = tokens[0];
-			userID = Integer.parseInt(userIdString);
+			userID = tokens[0];
+			// userID = Integer.parseInt(userIdString);
 			// user = new User(userID);
 
 			if (!userList.isEmpty()) {
 				boolean found = false;
 				for (User u : userList) {
-					if (u.getUserID() == userID) {
-					//	System.out.println(userID);
+					if (u.getUserID().equalsIgnoreCase(userID)) {
+						// System.out.println(userID);
 						found = true;
 						break;
 					}
 				}
 				if (found == false) {
-				//	System.out.println("not found:" + userID);
+					// System.out.println("not found:" + userID);
 					user = new User(userID);
 					userList.add(user);
 				}
@@ -71,20 +64,19 @@ public class FileParser2 {
 		}
 	}
 
-	
 	/**
 	 * Creates a hashmap of item (movie) objects and a hashset of all the users
-	 * who have rated that movie (the user's rating for that movie) AND
-	 * creates a hashmap for each user and populates it with movies that they have
+	 * who have rated that movie (the user's rating for that movie) AND creates
+	 * a hashmap for each user and populates it with movies that they have
 	 * rated, including their rating
 	 */
 	public void createMoviesMap() {
 
-		String userIdString;
-		String movieIdString;
+		String userID;
+		String movieID;
 		String userRatingString;
-		int userID;
-		int movieID;
+		// int userID;
+		// int movieID;
 		double userRating;
 		User user;
 		Item movie; // key in HM
@@ -93,12 +85,11 @@ public class FileParser2 {
 			String delims = "::";
 			String[] tokens = line.split(delims);
 
-			userIdString = tokens[0];
-			userID = Integer.parseInt(userIdString);
+			userID = tokens[0];
+			// userID = Integer.parseInt(userID);
 			// user = new User(userID);
 
-			movieIdString = tokens[1];
-			movieID = Integer.parseInt(movieIdString);
+			movieID = tokens[1];
 
 			userRatingString = tokens[2];
 			userRating = Double.parseDouble(userRatingString);
@@ -106,20 +97,20 @@ public class FileParser2 {
 			// movie = new Item(movieID);
 
 			// the movie list is not empty
-			boolean foundUser = false; 
+			boolean foundUser = false;
 			boolean foundMovie = false;
 			if (!movieList.isEmpty()) {
 
 				for (Item i : movieList.keySet()) {
 
 					// the movie exists in the hashmap
-					if (i.getMovieID() == movieID) {
+					if (i.getMovieID().equalsIgnoreCase(movieID)) {
 						HashSet<User> tempUser = movieList.get(i);
 						foundMovie = true; // found the movie!
 						for (User u : userList) {
 
 							// user exists in the userList!
-							if (u.getUserID() == userID) {
+							if (u.getUserID().equalsIgnoreCase(userID)) {
 								tempUser.add(u); // add the user for the movie
 								movieList.put(i, tempUser); // re-put the
 															// movie-userList
@@ -157,7 +148,7 @@ public class FileParser2 {
 
 					for (User u : userList) {
 						// user exists!
-						if (u.getUserID() == userID) {
+						if (u.getUserID().equalsIgnoreCase(userID)) {
 							// add user to the HashSet for the movie
 							users.add(u);
 							// add the movie rating to the user
@@ -190,7 +181,7 @@ public class FileParser2 {
 
 				for (User u : userList) {
 					// found the user
-					if (u.getUserID() == userID) {
+					if (u.getUserID().equalsIgnoreCase(userID)) {
 						// add to HashSet for the movie
 						users.add(u);
 						// add the movie for the user
@@ -213,34 +204,15 @@ public class FileParser2 {
 				}
 			}
 		}
-	
-//		for(Item i: movieList.keySet()) { 
-//			System.out.println("movie: " + i.getMovieID()); 
-//			System.out.print("Users: ");
-//			for(User u: movieList.get(i)) { 
-//				System.out.print(u.getUserID()+ " ");
-//			}
-//			System.out.println();
-//		}
-		
-		
-//		for(User u: userList) { 
-//			System.out.println("User: "+u.getUserID());
-//			for(Item i: u.getMovieRatings().keySet()) { 
-//				System.out.print("Movie "+i.getMovieID()+ ", Rating: " + u.getMovieRatings().get(i) + " ");
-//			}
-//			System.out.println();
-//		}
+
 	}
-	
+
 	public HashMap<Item, HashSet<User>> getMoviesList() {
 		return movieList;
 	}
-	
-	
+
 	public HashSet<User> getUsersList() {
 		return userList;
 	}
 
-	
 }

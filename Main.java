@@ -27,7 +27,7 @@ public class Main {
 			fp.createUserList();
 			fp.createMoviesMap();
 
-			HashMap<Item, HashSet<User>> moviesMap = fp.getMoviesList();
+			HashMap<Item, HashSet<User>> moviesMap = fp.getItemsList();
 			HashSet<User> usersList = fp.getUsersList();
 
 			Library library = new Library();
@@ -36,44 +36,31 @@ public class Main {
 
 			Predictions prediction = new Predictions(library);
 
-			// Print out userList
-			// System.out.println("Users List: ");
-			// for (User user : library.getUserList()) {
-			// System.out.println("User ID: " + user.getUserID());
-			// }
-
-			// Print out Movie HashMap
-			// System.out.println("Movies List: ");
-			//
-			// for(Item i: library.getMovieList().keySet()) {
-			// System.out.println(i.getMovieID());
-			// }
 
 			boolean flag = false;
 			while (!flag) {
 
 				System.out.println("If you would like to predict the user's likely preference for a movie type 1,"
 						+ " if you would like to display the n-highest predicted preferences for a user type 2.");
-				int userChoice = in.nextInt();
+				String userChoice = in.nextLine();
 
 				// part A
-				if (userChoice == 1) {
+				if (userChoice.equalsIgnoreCase("1")) {
 
 					flag = true;
 
 					System.out.println("Type the ID of the USER and press ENTER: "); // 2
-																						// for
-																						// testing
-					int userID = in.nextInt();
+																						// for																// testing
+					String userID = in.nextLine();
 
 					System.out.println("Type the ID of the MOVIE and press ENTER: "); // 4
 																						// for
 																						// testing
-					int movieID = in.nextInt();
+					String movieID = in.nextLine();
 
 					User user = null;
 					for (User u : library.getUserList()) {
-						if (u.getUserID() == userID) {
+						if (u.getUserID().equalsIgnoreCase(userID)) {
 							user = u;
 							break;
 						}
@@ -81,25 +68,25 @@ public class Main {
 
 					Item movie = null;
 					for (Item i : library.getItemList().keySet()) {
-						if (i.getMovieID() == movieID) {
+						if (i.getItemID().equalsIgnoreCase(movieID)) {
 							movie = i;
 							break;
 						}
 					}
-
+				//	System.out.println("user:" + user.getUserID() + " movie: " + movie.getItemID());
 					double predictionReturn = prediction.predictPreference(user, movie);
 					System.out.println("Prediction: " + predictionReturn);
 					System.out.println(" ");
 				}
 				// part B
-				else if (userChoice == 2) {
+				else if (userChoice.equalsIgnoreCase("2")) {
 
 					flag = true;
 
 					System.out.println("Type the ID of the USER and press ENTER: "); // 2
 																						// for
 																						// testing
-					int userID = in.nextInt();
+					String userID = in.nextLine();
 
 					System.out.println("Type the THRESHOLD and press ENTER: "); // 2
 																				// for
@@ -108,7 +95,7 @@ public class Main {
 
 					User user = null;
 					for (User u : library.getUserList()) {
-						if (u.getUserID() == userID) {
+						if (u.getUserID().equalsIgnoreCase(userID)) {
 							user = u;
 							break;
 						}
@@ -118,7 +105,7 @@ public class Main {
 																								// for
 																								// testing
 					for (Item i : ratings.keySet()) {
-						System.out.println("Movie: " + i.getMovieID() + " | " + "Rating: " + ratings.get(i));
+						System.out.println("Movie: " + i.getItemID() + " | " + "Rating: " + ratings.get(i));
 					}
 				}
 				// error

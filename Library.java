@@ -10,12 +10,12 @@ import java.util.HashSet;
 public class Library {
 
 	/* Instance Variables */
-	private HashMap<Item, HashSet<User>> movieList;
+	private HashMap<Item, HashSet<User>> itemList;
 	private HashSet<User> userList;
 
 	/* Constructor */
 	public Library() {
-		movieList = new HashMap<Item, HashSet<User>>();
+		itemList = new HashMap<Item, HashSet<User>>();
 		userList = new HashSet<User>();
 	}
 
@@ -24,8 +24,8 @@ public class Library {
 	 * 
 	 * @param movieList
 	 */
-	public void setItemList(HashMap<Item, HashSet<User>> movieList) {
-		this.movieList = movieList;
+	public void setItemList(HashMap<Item, HashSet<User>> itemList) {
+		this.itemList = itemList;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class Library {
 	}
 
 	public HashMap<Item, HashSet<User>> getItemList() {
-		return movieList;
+		return itemList;
 	}
 
 }

@@ -6,53 +6,32 @@ import java.util.HashMap;
  */
 public class Item {
 
-
 	/* Instance Variables */
-	int userID;
-	int movieID;
+	// String userID;
+	String itemID;
 
-	
 	/* Constructor */
-	public Item(int movieID) {
-		userID = 0;
-		this.movieID = movieID;
+	public Item(String itemID) {
+		// userID = 0;
+		this.itemID = itemID;
 	}
-
-
-	/**
-	 * Getter for userID
-	 * @return userID
-	 */
-	public int getUserID() {
-		return userID;
-	}
-
-
-	/**
-	 * Setter for userID
-	 * @param userID
-	 */
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
-
 
 	/**
 	 * Getter for movieID
+	 * 
 	 * @return movieID
 	 */
-	public int getMovieID() {
-		return movieID;
+	public String getItemID() {
+		return itemID;
 	}
-
 
 	/**
 	 * Setter for movieID
+	 * 
 	 * @param movieID
 	 */
-	public void setMovieID(int movieID) {
-		this.movieID = movieID;
-	}	
-	
-	
+	public void setItemID(String itemID) {
+		this.itemID = itemID;
+	}
+
 }
